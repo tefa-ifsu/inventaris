@@ -88,11 +88,15 @@
 }
 
 .menu-items {
-  height: 100%;
+  height: 80%;
   width: 100%;
   list-style: none;
   transition: all 0.4s ease;
 
+
+  .keluar{
+    transform: translateY(53vh);
+  }
 
 }
 
@@ -212,6 +216,118 @@
     margin-left: auto;
     margin-right: auto;
     z-index: 1;
+
+    .tambah-data{
+      transform: translateY(-120px);
+      padding: 10px;
+      width: 100%;
+
+      form{
+        padding-bottom: 20px;
+        padding-top: 20px;
+        border-radius: 15px;
+background: var(--Color, #FFF);
+
+box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.10), 0px 4px 6px -1px rgba(0, 0, 0, 0.10);
+
+        .col{
+          display: flex;
+          width: 85%;
+          justify-content: space-between;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: 20px;
+
+
+          .btn{
+            margin-left: auto;
+            margin-right: auto;
+          }
+
+
+          .deskripsi{
+            width: 100%;
+
+            p{
+              color: var(--neutral-800, #262626);
+              font-family: Poppins;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: normal;
+
+            }
+
+            textarea{
+              width: 100%;
+              height: 200px;
+              border-radius: 6px;
+border: 2px solid var(--gray-30, #E4E4E7);
+background: var(--Color, #FFF);
+color: var(--gray-40, #A1A1AA);
+font-family: Poppins;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+padding-left: 10px;
+padding-top: 10px;
+
+&:focus{
+  outline: 2px solid var(--gray-30, #E4E4E7);
+
+}
+            }
+          }
+
+          .teksbox{
+            display: block;
+
+       
+
+      
+
+            p{
+              color: var(--neutral-800, #262626);
+              font-family: Poppins;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: normal;
+
+            }
+
+      
+
+            input, select{
+            
+              height: 42px;
+              width: 500px;
+              border-radius: 6px;
+border: 2px solid var(--gray-30, #E4E4E7);
+background: var(--Color, #FFF);
+padding-left: 26px;
+color: var(--gray-40, #A1A1AA);
+font-family: Poppins;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+padding-right: 20px;
+
+
+
+
+
+&:focus{
+  outline: 2px solid var(--gray-30, #E4E4E7);
+
+}
+            }
+          }
+        }
+      }
+    }
 
     .tabel-barang {
       margin-top: -120px;
@@ -418,3 +534,4 @@
   font-size: 40px;
   text-align: center;
 }
+

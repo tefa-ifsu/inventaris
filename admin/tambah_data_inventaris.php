@@ -1,3 +1,31 @@
+
+
+<?php
+
+ include "koneksi.php";
+ if(isset($_POST['kirim']))
+ {
+     $kode_barang       = $_POST['kode_barang'];
+     $nama_barang        = $_POST['nama_barang'];
+     $deskripsi_barang        = $_POST['deskripsi_barang'];
+     $kategori_barang        = $_POST['kategori_barang'];
+     $harga_barang        = $_POST['harga_barang'];
+     $stok_barang        = $_POST['stok_barang'];
+     $tanggal_pembelian        = $_POST['tanggal_pembelian'];
+   
+
+     
+     mysqli_query($con, "INSERT INTO barang_inventaris VALUES('',
+         '$kode_barang','$nama_barang', '$deskripsi_barang', '$kategori_barang','$harga_barang', '$stok_barang','$tanggal_pembelian'
+     )") or die(mysqli_error($con));
+
+     
+     echo "<meta http-equiv='refresh' content='1;url=data_inventaris.php'>";
+ }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +80,7 @@
               <path d="M13 2.5V5C13 7.357 13 8.536 13.732 9.268C14.464 10 15.643 10 18 10H22" stroke="#FAFAFA"
                 stroke-width="1.5" />
             </svg> Peminjam</a>
-</li>
+        </li>
         <li class="keluar item ">
           <a href="#"><svg width="38" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M2 18C1.45 18 0.979002 17.804 0.587002 17.412C0.195002 17.02 -0.000664969 16.5493 1.69779e-06 16V2C1.69779e-06 1.45 0.196002 0.979002 0.588002 0.587002C0.980002 0.195002 1.45067 -0.000664969 2 1.69779e-06H9V2H2V16H9V18H2ZM13 14L11.625 12.55L14.175 10H6V8H14.175L11.625 5.45L13 4L18 9L13 14Z" fill="#FAFAFA"/>
@@ -60,13 +88,13 @@
  Logout</a>
 </li>
 
-</ul>
+      </ul>
     </div>
   </nav>
 
   <nav class="navbar">
     <div class="judul-halaman">
-      <h3>Data Barang </h3>
+      <h3>Tambah Data Barang </h3>
     </div>
     <div class="profil">
       <img src="assets/image/user.png" alt="">
@@ -77,67 +105,74 @@
 
   <main class="main">
     <div class="isi-konten">
-
-      <div class="tabel-barang">
-      <a href="tambah_data_inventaris.php" class="btn btn-primary">Tambahkan Data</a>
-        <table id="table-barang" class="table table-striped" style="width:100%">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>kode Barang</th>
-              <th>Nama Barang</th>
-              <th>Deskripsi Barang</th>
-              <th>Kategori Barang</th>
-              <th>Harga Barang </th>
-              <th>Stok Barang</th>
-              <th>Tanggal Pembelian</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-                        include "koneksi.php";
-                        $no = 1;
-                        $tampil = mysqli_query($con, "SELECT * FROM barang_inventaris");
-                        while ($data = mysqli_fetch_array($tampil)) { ?>
-            <tr>
-              <td><?php echo $data["id_barang"]; ?></td>
-              <td><?php echo $data["kode_barang"]; ?></td>
-              <td><?php echo $data["nama_barang"]; ?></td>
-              <td><?php echo $data["deskripsi_barang"]; ?></td>
-              <td><?php echo $data["kategori_barang"]; ?></td>
-              <td><?php echo $data["harga_barang"]; ?></td>
-              <td><?php echo $data["stok_barang"]; ?></td>
-              <td><?php echo $data["tanggal_pembelian"]; ?></td>
-              <td class="edit-hapus-barang">
-                <a href="edit_data_inventaris.php?id_barang=<?php echo $data['id_barang']; ?>"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 1 19 18"
-                    fill="none">
-                    <path
-                      d="M15.5325 6.9675L11.0325 2.4675C10.9634 2.40004 10.8819 2.34656 10.7925 2.31C10.6995 2.27221 10.6004 2.25187 10.5 2.25H4.5C3.90326 2.25 3.33097 2.48705 2.90901 2.90901C2.48705 3.33097 2.25 3.90326 2.25 4.5V13.5C2.25 14.0967 2.48705 14.669 2.90901 15.091C3.33097 15.5129 3.90326 15.75 4.5 15.75H13.5C14.0967 15.75 14.669 15.5129 15.091 15.091C15.5129 14.669 15.75 14.0967 15.75 13.5V7.5C15.7506 7.4013 15.7317 7.30345 15.6943 7.21207C15.657 7.12069 15.602 7.03758 15.5325 6.9675ZM6.75 3.75H9.75V5.25H6.75V3.75ZM11.25 14.25H6.75V12C6.75 11.8011 6.82902 11.6103 6.96967 11.4697C7.11032 11.329 7.30109 11.25 7.5 11.25H10.5C10.6989 11.25 10.8897 11.329 11.0303 11.4697C11.171 11.6103 11.25 11.8011 11.25 12V14.25ZM14.25 13.5C14.25 13.6989 14.171 13.8897 14.0303 14.0303C13.8897 14.171 13.6989 14.25 13.5 14.25H12.75V12C12.75 11.4033 12.5129 10.831 12.091 10.409C11.669 9.98705 11.0967 9.75 10.5 9.75H7.5C6.90326 9.75 6.33097 9.98705 5.90901 10.409C5.48705 10.831 5.25 11.4033 5.25 12V14.25H4.5C4.30109 14.25 4.11032 14.171 3.96967 14.0303C3.82902 13.8897 3.75 13.6989 3.75 13.5V4.5C3.75 4.30109 3.82902 4.11032 3.96967 3.96967C4.11032 3.82902 4.30109 3.75 4.5 3.75H5.25V6C5.25 6.19891 5.32902 6.38968 5.46967 6.53033C5.61032 6.67098 5.80109 6.75 6 6.75H10.5C10.6989 6.75 10.8897 6.67098 11.0303 6.53033C11.171 6.38968 11.25 6.19891 11.25 6V4.8075L14.25 7.8075V13.5Z"
-                      fill="white" />
-                  </svg> Edit</a>
-                <a href="delete_data_inventaris.php?id_barang=<?php echo $data['id_barang']; ?>"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 1 19 18"
-                    fill="none">
-                    <path
-                      d="M15.5325 6.9675L11.0325 2.4675C10.9634 2.40004 10.8819 2.34656 10.7925 2.31C10.6995 2.27221 10.6004 2.25187 10.5 2.25H4.5C3.90326 2.25 3.33097 2.48705 2.90901 2.90901C2.48705 3.33097 2.25 3.90326 2.25 4.5V13.5C2.25 14.0967 2.48705 14.669 2.90901 15.091C3.33097 15.5129 3.90326 15.75 4.5 15.75H13.5C14.0967 15.75 14.669 15.5129 15.091 15.091C15.5129 14.669 15.75 14.0967 15.75 13.5V7.5C15.7506 7.4013 15.7317 7.30345 15.6943 7.21207C15.657 7.12069 15.602 7.03758 15.5325 6.9675ZM6.75 3.75H9.75V5.25H6.75V3.75ZM11.25 14.25H6.75V12C6.75 11.8011 6.82902 11.6103 6.96967 11.4697C7.11032 11.329 7.30109 11.25 7.5 11.25H10.5C10.6989 11.25 10.8897 11.329 11.0303 11.4697C11.171 11.6103 11.25 11.8011 11.25 12V14.25ZM14.25 13.5C14.25 13.6989 14.171 13.8897 14.0303 14.0303C13.8897 14.171 13.6989 14.25 13.5 14.25H12.75V12C12.75 11.4033 12.5129 10.831 12.091 10.409C11.669 9.98705 11.0967 9.75 10.5 9.75H7.5C6.90326 9.75 6.33097 9.98705 5.90901 10.409C5.48705 10.831 5.25 11.4033 5.25 12V14.25H4.5C4.30109 14.25 4.11032 14.171 3.96967 14.0303C3.82902 13.8897 3.75 13.6989 3.75 13.5V4.5C3.75 4.30109 3.82902 4.11032 3.96967 3.96967C4.11032 3.82902 4.30109 3.75 4.5 3.75H5.25V6C5.25 6.19891 5.32902 6.38968 5.46967 6.53033C5.61032 6.67098 5.80109 6.75 6 6.75H10.5C10.6989 6.75 10.8897 6.67098 11.0303 6.53033C11.171 6.38968 11.25 6.19891 11.25 6V4.8075L14.25 7.8075V13.5Z"
-                      fill="white" />
-                  </svg> Delete</a>
+    <div class="tambah-data">
+    <form action="" method="POST">
 
 
-              </td>
-            </tr>
-
-            <?php }
-                        ?>
-
-          </tbody>
-
-        </table>
+      <div class="col">
+        <div class="teksbox">
+          <p>Nama Barang</p>
+          <input type="text" name="nama_barang" placeholder="Nama Barang" required>
+        </div>
+        <div class="teksbox">
+          <p>Kode Barang</p>
+          <input type="text" name="kode_barang" placeholder="Kode Barang" required>
+        </div>
       </div>
 
-    </div>
-    </div>
+      <div class="col">
+        <div class="teksbox">
+          <p>Kategori Barang</p>
 
+   
+
+         <select name="kategori_barang" id="">
+          <?php
+                        include "koneksi.php";
+                        $no = 1;
+                        $tampil = mysqli_query($con, "SELECT * FROM kategori_barang_inventaris");
+                        while ($data = mysqli_fetch_array($tampil)) { ?>
+          <option value="<?php echo $data["nama_kategori"]; ?>"><?php echo $data["nama_kategori"]; ?></option> 
+              <?php }
+                        ?>
+         </select>
+
+    
+        </div>
+        <div class="teksbox">
+          <p>Harga Barang</p>
+          <input type="text" name="harga_barang" placeholder="Rp." required>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="teksbox">
+          <p>Tanggal Pembelian</p>
+          <input type="date" name="tanggal_pembelian" placeholder="Nama Barang" required>
+        </div>
+        <div class="teksbox">
+          <p>Stok Barang</p>
+          <input type="number" name="stok_barang" placeholder="Stok Barang" required>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="deskripsi">
+          <p>Deskripsi  </p>
+          <textarea name="deskripsi_barang" id="" required></textarea>
+        </div>
+      </div>
+      
+      <div class="col">
+        <button class="btn btn-primary" name="kirim">Konfirmasi</button>
+      </div>
+      
+    
+   
+
+    </form>
+    </div>
+</div>
   </main>
 
 
