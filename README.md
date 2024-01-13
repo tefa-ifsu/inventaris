@@ -1,1 +1,1 @@
-# inventaris
+Aplikasi inventaris
